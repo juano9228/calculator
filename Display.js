@@ -9,6 +9,12 @@ class Display {
         this.valorActual = '';
         this.valorAnterior = '';
     }
+
+    borrar() {
+        this.valorActual = this.valorActual.toString().slice(0,-1);
+        this.imprimirValores();
+
+    }
     
     agregarNumero(numero){
         /*metodo para agregar los numeros a la calculadora
@@ -18,7 +24,8 @@ class Display {
         sea igual alque recibimos
         ##El vlor actual de disply al valor del numero a typear
         */
-       this.valorActual = numero; 
+       if (numero == '.' && this.valorActual.includes('.')) return
+       this.valorActual = this.valorActual.toString() + numero.toString(); 
        this.imprimirValores();
       
     }

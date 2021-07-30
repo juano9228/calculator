@@ -16,4 +16,8 @@ const display = new Display(displayValorAnterior, displayValorActual);
 
 botonesNumeros.forEach(boton => {
     boton.addEventListener('click', () => display.agregarNumero(boton.innerHTML));
+    /*cada vez que se precione un boton
+    que el display agregue un numero, el numero que 
+    pertenece, cada vez que de click en uno de los botones
+    va pasar el su innerHTML como parametro*/
 });
