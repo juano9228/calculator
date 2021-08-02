@@ -6,8 +6,15 @@ class Display {
         this.displayValorActual = displayValorActual;
         this.displayValorAnterior = displayValorAnterior;
         this.calculador = new Calculadora();
+        this.tipoOperacion = undefined;
         this.valorActual = '';
         this.valorAnterior = '';
+        this.signos = {
+            sumar: '+',
+            dividir: '%',
+            mul: 'x',
+            restar: '-',
+        }
     }
 
     borrar() {
@@ -15,7 +22,22 @@ class Display {
         this.imprimirValores();
 
     }
+
+    borrarTodo() {
+        this.valorActual = '';
+        this.valorAnterior = '';
+        this.tipoOperacion = undefined;
+        this.imprimirValores();
+    }
     
+    computar(tipo) {
+        this.tipoOperacion !== 'igual' && this.calcular();
+        this.tipoOperacion = tipo;
+        this.valorAnterior = this.valorActual || this.valorAnterior;
+        this.valorActual = '';
+        this.imprimirValores();
+    }
+
     agregarNumero(numero){
         /*metodo para agregar los numeros a la calculadora
         recivir numero como paametro, y que valorActual, 
@@ -32,6 +54,18 @@ class Display {
 
     imprimirValores() {
         this.displayValorActual.textContent = this.valorActual;
-        this.displayValorAnterior.textContent = this.valorAnterior;
+        this.displayValorAnterior.textContent = `${this.valorAnterior} ${this.signos[this.tipoOperacion] || ''}`;
     }
+
+    calcular() {//Tomar los valores que tiene display 
+        //y pasarlos a calculadora para que haga los calculos
+
+        const valorAnterior = parseFloat(this.valorAnterior);
+        const valorActual = parseFloat(this.valorActual);
+
+        if( isNaN(valorActual)  || isNaN(valorAnterior) ) return
+        this.valorActual = this.calculador[this.tipoOperacion](valorAnterior, valorActual);
+       
+    }
+
 }

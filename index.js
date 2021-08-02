@@ -21,3 +21,7 @@ botonesNumeros.forEach(boton => {
     pertenece, cada vez que de click en uno de los botones
     va pasar el su innerHTML como parametro*/
 });
+
+botonesOperadores.forEach(boton => {
+    boton.addEventListener('click', () => display.computar(boton.value))
+});
